@@ -13,3 +13,21 @@
 main {
   padding-top: 2rem;
 }
+
+.skip-link {
+  position: absolute;
+  left: 1.5rem;
+  top: 1rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+  transform: translateY(-150%);
+  transition: transform 0.2s ease;
+  z-index: 5;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}

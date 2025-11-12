@@ -5,6 +5,11 @@ export const heroContent = {
     'SARGA unites legal precision and go-to-market insight so founders and enterprises can launch, scale, and protect what they build across India.',
   primaryCta: { label: 'Book a strategic consult', href: '#contact' },
   secondaryCta: { label: 'Explore practice areas', href: '#practice-areas' },
+  proofs: [
+    { value: '200+', label: 'IP matters guided confidentially' },
+    { value: '24h', label: 'Cybercrime response desk' },
+    { value: 'Pan-India', label: 'Counsel + advocate network' },
+  ],
 }
 
 export const aboutContent = {
@@ -22,5 +27,5 @@ export const founderQuote = {
   quote:
     'We built SARGA to give builders a legal partner who sees around corners—who shields creations without slowing them down.',
   author: 'SARGA Leadership',
-  context: 'Creation-first legal strategy, born in Hyderabad and operating across India.'
+  context: 'Creation-first legal strategy, born in Hyderabad and operating across India.',
 }

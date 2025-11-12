@@ -1,44 +1,49 @@
 # SARGA — Future of Creation
 
-Marketing-first website for SARGA, a Hyderabad-based legal collective focused on IP, cybercrime, insurance, and labour mandates. Built with React + TypeScript + Vite.
+Responsive marketing site for SARGA, a Hyderabad-based legal collective focused on IP, cybercrime, insurance, and labour mandates. Built with React + TypeScript + Vite and tuned for soft modern branding (light blue + deep charcoal palette).
 
-## Tech Stack
-- Vite + React 18 + TypeScript
-- CSS modules with custom tokens, gradients, and dark-mode toggles
-- Formspree for contact and talent intake
-- Custom reveal animations (IntersectionObserver) and analytics helper
+## Features
+- Floating card navigation inspired by React Bits with locale + theme toggles and mobile slide-out.
+- Hero/About merge with skyline art, proof chips (no NDA breaches), and dual CTAs.
+- Practice areas rendered as expandable cards with localized copy for English, Hindi, and Telugu.
+- Partners carousel built on scroll-snap cards (opaque backgrounds, quotes, LinkedIn links).
+- Collaboration + contact funnels powered by Formspree (primary: `https://formspree.io/f/xkgknejn`) with dedicated Work With Us intake.
+- Light/dark themes with system preference detection, compliant disclaimer gate, and embedded Google Map teaser for the Kondapur office.
+- SEO metadata + social tags handled through `index.html`, plus hooks for Google Analytics.
 
-## Structure
+## Project Structure
 ```
-public/            # Static assets (logos, imagery, favicons)
+public/             # Static assets (imagery, favicons, icons)
 src/
-  components/      # Layout + section components
-  data/            # Narrative + practice area content modules
-  hooks/           # Theme preference & utilities
-  styles/          # Base tokens, globals, page styles
-  utils/           # Analytics + reveal helpers
+  components/       # Layout primitives + section components
+  data/             # Narrative content, translations, partner + practice configs
+  hooks/            # Theme + locale persistence, animations
+  styles/           # Tokens, globals, per-section CSS modules
+  utils/            # Analytics + reveal helpers
 ```
 
-## Scripts
+## Getting Started
 ```bash
-npm install       # install dependencies
-npm run dev       # start Vite dev server (http://localhost:5173)
-npm run build     # production build (outputs dist/)
-npm run preview   # preview production build
+npm install        # install dependencies (Node 20+, npm 9+)
+npm run dev        # start Vite dev server at http://localhost:5173
+npm run lint       # run ESLint with repo config
+npm run build      # type-check (tsc -b) + Vite production build to dist/
+npm run preview    # locally serve the production bundle
 ```
+
+## Environment Variables
+Set via `.env.local` or Vercel dashboard:
+- `VITE_GA_MEASUREMENT_ID` — optional Google Analytics tag.
+- `VITE_FORMSPREE_ENDPOINT` — primary contact Formspree endpoint.
+- `VITE_FORMSPREE_TALENT_ENDPOINT` — Work With Us / collaboration form endpoint.
 
 ## Deployment
-- Optimized for Vercel: `npm run build` produces static assets served from `dist/`.
-- Set environment variables as needed (`VITE_GA_MEASUREMENT_ID`, `VITE_FORMSPREE_ENDPOINT`, `VITE_FORMSPREE_TALENT_ENDPOINT`).
-- Push to GitHub (`sargaftc-dev/SARGA`) and connect to Vercel for auto deploys.
+1. Push to `sargaftc-dev/SARGA` (main branch).  
+2. Vercel project picks up the repo; build command `npm run build`, output `dist/`.  
+3. Configure preview/prod env vars above.  
+4. Smoke test via `npm run preview`, then verify on the deployed URL (forms, nav, locale toggle, disclaimer, GA events).
 
-## Privacy & Compliance
-- Disclaimer gate ensures visitors acknowledge non-solicitation + confidentiality expectations.
-- Contact/Talent forms note NDA availability; update copy as regulatory guidance evolves.
-
-## Roadmap / TODO
-- Add proof points (metrics/testimonials) to hero + practice cards.
-- Enhance partner bios with years, courts, and notable matters.
-- Add CTA to regional reach section.
-- Integrate analytics measurement ID + conversion events.
-- Implement success/error states for forms and optional file uploads.
+## Contributing & QA
+- Follow the detailed contributor guide in `AGENTS.md` plus the backlog stored in `TODO.md` (both ignored from git history).
+- Manual QA per change: hero CTA clicks, locale switch, partner carousel, practice area expand/collapse, both Formspree submissions, mobile nav, theme toggle, disclaimer acceptance.
+- Use Lighthouse/Chrome dev tools to validate mobile optimizations before requesting reviews.

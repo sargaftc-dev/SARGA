@@ -169,6 +169,26 @@
   color: var(--color-muted);
 }
 
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form-status {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.form-status--success {
+  color: #1e8a5b;
+}
+
+.form-status--error {
+  color: #c13d3d;
+}
+
 :root[data-theme='dark'] .contact-cta__map-card {
   background: rgba(15, 23, 41, 0.9);
   border-color: rgba(255, 255, 255, 0.1);

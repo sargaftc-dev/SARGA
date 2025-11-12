@@ -1,84 +1,120 @@
 import { useEffect, useState } from 'react'
+import type { MouseEvent } from 'react'
 import type { ThemeMode } from '../../hooks/useThemePreference'
 import { ThemeToggle } from '../common/ThemeToggle'
+import { copy, locales } from '../../data/i18n'
+import { useLocale } from '../../hooks/useLocale'
 import './header.css'
 
 const navLinks = [
-  { label: 'Approach', href: '/#about' },
-  { label: 'Practice Areas', href: '/#practice-areas' },
-  { label: 'Reach', href: '/#reach' },
-]
+  { key: 'approach', href: '#hero', type: 'hash' },
+  { key: 'practice', href: '#practice-areas', type: 'hash' },
+  { key: 'reach', href: '#reach', type: 'hash' },
+  { key: 'workWithUs', href: '/work-with-us', type: 'route' },
+] as const
 
 interface HeaderProps {
   themeMode: ThemeMode
   onThemeChange: (mode: ThemeMode) => void
+  currentPath: string
+  onNavigate?: (path: string) => void
 }
 
-export function Header({ themeMode, onThemeChange }: HeaderProps) {
+export function Header({ themeMode, onThemeChange, currentPath, onNavigate }: HeaderProps) {
   const [isNavOpen, setIsNavOpen] = useState(false)
-
-  const closeNav = () => setIsNavOpen(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const { locale, setLocale } = useLocale()
+  const navMenuId = 'primary-nav'
 
   useEffect(() => {
-    if (typeof document === 'undefined') {
-      return
-    }
+    const onScroll = () => setIsScrolled(window.scrollY > 40)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
-    if (document.body.dataset.disclaimer === 'true') {
-      return
-    }
-
+  useEffect(() => {
     document.body.style.overflow = isNavOpen ? 'hidden' : ''
     return () => {
-      if (document.body.dataset.disclaimer !== 'true') {
-        document.body.style.overflow = ''
-      }
+      document.body.style.overflow = ''
     }
   }, [isNavOpen])
 
+  useEffect(() => {
+    setIsNavOpen(false)
+  }, [currentPath])
+
+  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string, type: (typeof navLinks)[number]['type']) => {
+    if (type === 'route' && onNavigate) {
+      event.preventDefault()
+      onNavigate(href)
+    }
+    setIsNavOpen(false)
+  }
+
+  const handleBrandClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (onNavigate) {
+      event.preventDefault()
+      onNavigate('/')
+    }
+    setIsNavOpen(false)
+  }
+
   return (
-    <header className="site-header">
-      <div className="site-header__inner">
-        <a className="site-header__brand" href="#">
-          <span>SARGA</span>
-          <small>Legal Strategy</small>
-        </a>
-        <div className="site-header__actions">
-          <button
-            className="site-header__menu-toggle"
-            type="button"
-            aria-expanded={isNavOpen}
-            aria-controls="primary-navigation"
-            onClick={() => setIsNavOpen((prev) => !prev)}
-          >
-            <span className="sr-only">Toggle navigation</span>
-            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path
-                d={isNavOpen ? 'M6 6l12 12M6 18L18 6' : 'M4 7h16M4 12h16M4 17h10'}
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-              />
-            </svg>
-          </button>
-          <nav
-            id="primary-navigation"
-            className={`site-header__nav ${isNavOpen ? 'is-open' : ''}`.trim()}
-            aria-label="Primary"
-          >
+    <header className={`site-header ${isScrolled ? 'is-scrolled' : ''}`}>
+      <div className="nav-shell">
+        <div className="nav-card">
+          <a className="nav-brand" href="/" onClick={handleBrandClick}>
+            <span>SARGA</span>
+            <small>Future of Creation</small>
+          </a>
+          <nav className={`nav-links ${isNavOpen ? 'is-open' : ''}`} aria-label="Primary" id={navMenuId}>
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} onClick={closeNav}>
-                {link.label}
+              <a
+                key={link.key}
+                href={link.href}
+                aria-current={link.type === 'route' && currentPath === link.href ? 'page' : undefined}
+                onClick={(event) => handleNavClick(event, link.href, link.type)}
+              >
+                {copy.nav[link.key as keyof typeof copy.nav]?.[locale] ?? link.key}
               </a>
             ))}
-            <a className="site-header__contact" href="/work-with-us" onClick={closeNav}>
-              Work with us
-            </a>
           </nav>
-          <ThemeToggle mode={themeMode} onChange={onThemeChange} />
+          <div className="nav-actions">
+            <ThemeToggle mode={themeMode} onChange={onThemeChange} />
+            <label htmlFor="locale-select" className="sr-only">
+              Change language
+            </label>
+            <select
+              id="locale-select"
+              value={locale}
+              onChange={(e) => setLocale(e.target.value as keyof typeof locales)}
+              aria-label="Select language"
+            >
+              {Object.entries(locales).map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+            <a className="nav-cta" href="#contact" aria-label="Book a consult">
+              Book consult
+            </a>
+            <button
+              className={`nav-toggle ${isNavOpen ? 'is-open' : ''}`}
+              type="button"
+              aria-expanded={isNavOpen}
+              aria-controls={navMenuId}
+              onClick={() => setIsNavOpen((prev) => !prev)}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+          </div>
         </div>
+        {isNavOpen && <div className="nav-backdrop" onClick={() => setIsNavOpen(false)} />}
       </div>
-      {isNavOpen && <div className="site-header__nav-backdrop" onClick={closeNav} aria-hidden="true" />}
     </header>
   )
 }

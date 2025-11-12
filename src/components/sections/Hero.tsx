@@ -1,21 +1,33 @@
 import { heroContent, aboutContent, founderQuote } from '../../data/brandNarrative'
+import { copy } from '../../data/i18n'
+import { useLocale } from '../../hooks/useLocale'
 import { ButtonLink } from '../common/ButtonLink'
 import { Badge } from '../common/Badge'
 import './hero.css'
 
 export function HeroSection() {
+  const { locale } = useLocale()
+
   return (
     <section id="hero" className="hero section-shell">
       <div className="section-inner hero__inner surface-card" data-reveal="fade-up">
         <div className="hero__content">
           <Badge>{heroContent.eyebrow}</Badge>
-          <h1>{heroContent.title}</h1>
-          <p>{heroContent.description}</p>
+          <h1>{copy.hero.title[locale]}</h1>
+          <p>{copy.hero.description[locale]}</p>
           <div className="hero__actions">
-            <ButtonLink href={heroContent.primaryCta.href}>{heroContent.primaryCta.label}</ButtonLink>
+            <ButtonLink href={heroContent.primaryCta.href}>{copy.hero.ctaPrimary[locale]}</ButtonLink>
             <ButtonLink variant="ghost" href={heroContent.secondaryCta.href}>
-              {heroContent.secondaryCta.label}
+              {copy.hero.ctaSecondary[locale]}
             </ButtonLink>
+          </div>
+          <div className="hero__proofs">
+            {heroContent.proofs.map((item) => (
+              <div key={item.label}>
+                <strong>{item.value}</strong>
+                <span>{item.label}</span>
+              </div>
+            ))}
           </div>
         </div>
         <div className="hero__about">

@@ -102,6 +102,31 @@
   box-shadow: var(--shadow-card);
 }
 
+.work-with-us__privacy {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.work-with-us__footer .form-status {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.work-with-us__footer .form-status--success {
+  color: #1e8a5b;
+}
+
+.work-with-us__footer .form-status--error {
+  color: #c13d3d;
+}
+
+.work-with-us__form .form-honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 :root[data-theme='dark'] .work-with-us__form input,
 :root[data-theme='dark'] .work-with-us__form select,
 :root[data-theme='dark'] .work-with-us__form textarea {

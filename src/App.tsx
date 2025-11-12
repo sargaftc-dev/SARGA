@@ -11,6 +11,7 @@ import { DisclaimerGate } from './components/common/DisclaimerGate'
 import { useThemePreference, type ThemeMode } from './hooks/useThemePreference'
 import { initRevealAnimations } from './utils/reveal'
 import './styles/pages/home.css'
+import { LocaleProvider } from './hooks/useLocale'
 
 const DISCLAIMER_KEY = 'sarga-disclaimer-accepted'
 
@@ -60,19 +61,36 @@ function App() {
     setCurrentPath(getPathname())
   }, [])
 
-  const renderWorkWithUs = () => (
-    <>
-      <WorkWithUsSection />
-    </>
-  )
+  const handleNavigate = (path: string) => {
+    if (typeof window === 'undefined') {
+      setCurrentPath(path)
+      return
+    }
+
+    if (getPathname() === path) {
+      setCurrentPath(path)
+      return
+    }
+
+    window.history.pushState({}, '', path)
+    setCurrentPath(getPathname())
+    window.scrollTo({ top: 0, behavior: 'auto' })
+  }
 
   const isWorkRoute = currentPath === '/work-with-us'
 
   return (
-    <>
+    <LocaleProvider>
       <DisclaimerGate open={!disclaimerAccepted} onAccept={handleAcceptDisclaimer} />
-      <PageLayout themeMode={mode} onThemeChange={handleThemeChange}>
-        {isWorkRoute ? renderWorkWithUs() : (
+      <PageLayout
+        themeMode={mode}
+        onThemeChange={handleThemeChange}
+        currentPath={currentPath}
+        onNavigate={handleNavigate}
+      >
+        {isWorkRoute ? (
+          <WorkWithUsSection />
+        ) : (
           <>
             <HeroSection />
             <PracticeAreasSection />
@@ -83,7 +101,7 @@ function App() {
           </>
         )}
       </PageLayout>
-    </>
+    </LocaleProvider>
   )
 }
 

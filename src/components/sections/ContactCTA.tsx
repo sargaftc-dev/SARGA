@@ -1,10 +1,52 @@
+import { useState } from 'react'
 import { partners } from '../../data/partners'
 import { ButtonLink } from '../common/ButtonLink'
 import './contact-cta.css'
 
 const formEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT || 'https://formspree.io/f/xkgknejn'
 
+type FormStatus = 'idle' | 'loading' | 'success' | 'error'
+
 export function ContactCTASection() {
+  const [status, setStatus] = useState<FormStatus>('idle')
+  const [statusMessage, setStatusMessage] = useState('')
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const form = event.currentTarget
+    const honeypot = form.querySelector<HTMLInputElement>('input[name="company"]')
+
+    if (honeypot?.value) {
+      return
+    }
+
+    setStatus('loading')
+    setStatusMessage('Sending your brief…')
+
+    const formData = new FormData(form)
+    formData.append('submittedAt', new Date().toISOString())
+
+    try {
+      const response = await fetch(formEndpoint, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: formData,
+      })
+
+      if (!response.ok) {
+        throw new Error('Formspree error')
+      }
+
+      form.reset()
+      setStatus('success')
+      setStatusMessage('Thanks for reaching out. Expect a confidential response within one business day.')
+    } catch (error) {
+      console.error(error)
+      setStatus('error')
+      setStatusMessage('We could not submit your request. Email sargaftc@gmail.com and we will assist you right away.')
+    }
+  }
+
   return (
     <section id="contact" className="section-shell">
       <div className="section-inner contact-cta surface-card">
@@ -61,9 +103,16 @@ export function ContactCTASection() {
             </ButtonLink>
           </div>
         </div>
-        <form className="contact-form" action={formEndpoint} method="POST" data-reveal="fade-up" data-reveal-delay="200">
+        <form className="contact-form" onSubmit={handleSubmit} noValidate data-reveal="fade-up" data-reveal-delay="200">
           <input type="hidden" name="_subject" value="SARGA | Consultation Request" />
           <input type="hidden" name="source" value="sarga-website" />
+          <input type="hidden" name="formName" value="contact" />
+          <div className="form-honeypot" aria-hidden="true">
+            <label>
+              Company
+              <input type="text" name="company" tabIndex={-1} autoComplete="off" />
+            </label>
+          </div>
           <div className="contact-form__group">
             <label htmlFor="fullName">Full name</label>
             <input id="fullName" name="fullName" type="text" placeholder="Your name" required />
@@ -111,8 +160,16 @@ export function ContactCTASection() {
             ></textarea>
           </div>
           <div className="contact-form__footer">
-            <button type="submit">Submit request</button>
-            <p>We respond within one business day. Submissions remain confidential.</p>
+            <button type="submit" disabled={status === 'loading'}>
+              {status === 'loading' ? 'Submitting…' : 'Submit request'}
+            </button>
+            <p>
+              We respond within one business day. Submissions remain confidential and are encrypted via Formspree. Need a
+              faster channel? Email <a href="mailto:sargaftc@gmail.com">sargaftc@gmail.com</a>.
+            </p>
+            <p className={`form-status form-status--${status}`} aria-live="polite">
+              {status !== 'idle' ? statusMessage : ''}
+            </p>
           </div>
         </form>
       </div>

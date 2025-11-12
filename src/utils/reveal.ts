@@ -10,6 +10,14 @@ export function initRevealAnimations() {
     return
   }
 
+  const reduceMotion =
+    typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (reduceMotion) {
+    elements.forEach((element) => element.classList.add('is-visible'))
+    return
+  }
+
   if (!observer) {
     observer = new IntersectionObserver(
       (entries) => {
