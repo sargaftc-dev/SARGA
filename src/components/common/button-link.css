@@ -1,0 +1,46 @@
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: transform var(--transition-base), box-shadow var(--transition-base), background var(--transition-base);
+}
+
+.button-link--solid {
+  background: linear-gradient(120deg, var(--color-primary), var(--color-accent));
+  color: var(--color-primary-strong);
+  box-shadow: var(--shadow-card);
+}
+
+.button-link--solid:hover {
+  transform: translateY(-2px);
+}
+
+.button-link--ghost {
+  background: transparent;
+  border-color: var(--color-line);
+  color: var(--color-text);
+}
+
+.button-link--ghost:hover {
+  border-color: var(--color-accent);
+  color: var(--color-primary-strong);
+}
+
+:root[data-theme='dark'] .button-link--solid {
+  color: #0e1117;
+}
+
+:root[data-theme='dark'] .button-link--ghost {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+:root[data-theme='dark'] .button-link--ghost:hover {
+  border-color: rgba(95, 176, 255, 0.6);
+  color: #fff;
+}

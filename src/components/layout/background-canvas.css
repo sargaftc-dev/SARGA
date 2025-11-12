@@ -1,0 +1,60 @@
+.background-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle at 10% 20%, rgba(169, 215, 255, 0.35), transparent 60%),
+    radial-gradient(circle at 90% 10%, rgba(95, 176, 255, 0.25), transparent 50%), var(--color-bg);
+}
+
+.background-canvas .orb {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  filter: blur(0px);
+  opacity: 0.55;
+  animation: float 18s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.65), rgba(95, 176, 255, 0.1));
+}
+
+.orb--one {
+  top: 10%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.orb--two {
+  bottom: 15%;
+  right: 10%;
+  animation-delay: 4s;
+}
+
+.orb--three {
+  top: 55%;
+  left: 45%;
+  animation-delay: 8s;
+}
+
+.background-canvas .grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      90deg,
+      var(--color-grid-line) 1px,
+      transparent 1px
+    ),
+    linear-gradient(0deg, var(--color-grid-line) 1px, transparent 1px);
+  background-size: 160px 160px;
+  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.25), transparent 70%);
+}
+
+:root[data-theme='dark'] .background-canvas {
+  background: radial-gradient(circle at 15% 15%, rgba(95, 176, 255, 0.15), transparent 55%),
+    radial-gradient(circle at 80% 0%, rgba(22, 28, 45, 0.9), transparent 65%), var(--color-bg);
+}
+
+:root[data-theme='dark'] .background-canvas .orb {
+  opacity: 0.4;
+  background: radial-gradient(circle, rgba(95, 176, 255, 0.25), rgba(5, 7, 13, 0.9));
+}

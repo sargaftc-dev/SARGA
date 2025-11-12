@@ -1,0 +1,16 @@
+@import './styles/base/tokens.css';
+@import './styles/base/global.css';
+@import './styles/base/animations.css';
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}

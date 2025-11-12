@@ -1,0 +1,7 @@
+.page-shell {
+  background: var(--color-bg);
+}
+
+.section-shell:nth-of-type(even) .surface-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(169, 215, 255, 0.2));
+}

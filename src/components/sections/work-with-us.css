@@ -1,0 +1,121 @@
+.work-with-us {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.work-with-us__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.work-with-us__intro h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  margin: 0.75rem 0;
+}
+
+.work-with-us__intro p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.work-with-us__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.work-with-us__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.work-with-us__form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-primary-strong);
+}
+
+.work-with-us__form input,
+.work-with-us__form select,
+.work-with-us__form textarea {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-line);
+  padding: 0.75rem 0.9rem;
+  font: inherit;
+  background: rgba(246, 249, 252, 0.9);
+  color: var(--color-text);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.work-with-us__form input:focus,
+.work-with-us__form select:focus,
+.work-with-us__form textarea:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(169, 215, 255, 0.4);
+  outline: none;
+}
+
+.work-with-us__statement textarea {
+  min-height: 140px;
+}
+
+.work-with-us__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.work-with-us__footer p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.work-with-us__footer a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.work-with-us__footer button {
+  align-self: flex-start;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1.5rem;
+  font-weight: 600;
+  background: linear-gradient(120deg, var(--color-primary), var(--color-accent));
+  color: var(--color-primary-strong);
+  cursor: pointer;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.work-with-us__footer button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-card);
+}
+
+:root[data-theme='dark'] .work-with-us__form input,
+:root[data-theme='dark'] .work-with-us__form select,
+:root[data-theme='dark'] .work-with-us__form textarea {
+  background: rgba(9, 12, 20, 0.7);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+:root[data-theme='dark'] .work-with-us {
+  background: rgba(15, 20, 34, 0.95);
+}
+
+@media (max-width: 640px) {
+  .work-with-us {
+    padding: 2rem;
+  }
+}

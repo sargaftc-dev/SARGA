@@ -1,0 +1,68 @@
+.reach {
+  padding: 3rem;
+}
+
+.reach header {
+  max-width: 680px;
+  margin-bottom: 2rem;
+}
+
+.reach__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+.reach h2 {
+  font-family: var(--font-serif);
+  margin-bottom: 0.5rem;
+}
+
+.reach__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.reach__grid article {
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-line);
+  background: rgba(255, 255, 255, 0.85);
+  min-height: 180px;
+}
+
+.reach__region {
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+}
+
+.reach__role {
+  margin: 0 0 0.35rem;
+  color: var(--color-muted);
+}
+
+.reach__focus {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+:root[data-theme='dark'] .reach__grid article {
+  background: rgba(15, 23, 41, 0.9);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme='dark'] .reach__role {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 640px) {
+  .reach {
+    padding: 2.5rem;
+  }
+
+  .reach__grid {
+    grid-template-columns: 1fr;
+  }
+}

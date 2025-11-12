@@ -1,0 +1,15 @@
+.page-shell {
+  background: transparent;
+  min-height: 100vh;
+  position: relative;
+}
+
+.page-shell__content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+main {
+  padding-top: 2rem;
+}

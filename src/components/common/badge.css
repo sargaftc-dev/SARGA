@@ -1,0 +1,38 @@
+
+:root .badge,
+:root[data-theme='dark'] .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid transparent;
+  backdrop-filter: blur(6px);
+}
+
+.badge--primary {
+  background: rgba(95, 176, 255, 0.22);
+  color: var(--color-primary-strong);
+  border-color: rgba(95, 176, 255, 0.4);
+}
+
+.badge--outline {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--color-text);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+:root[data-theme='dark'] .badge--primary {
+  background: rgba(95, 176, 255, 0.25);
+  color: rgba(14, 17, 23, 0.95);
+}
+
+:root[data-theme='dark'] .badge--outline {
+  background: rgba(15, 20, 34, 0.5);
+  color: rgba(255, 255, 255, 0.85);
+  border-color: rgba(255, 255, 255, 0.2);
+}
