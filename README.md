@@ -1,73 +1,44 @@
-# React + TypeScript + Vite
+# SARGA — Future of Creation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Marketing-first website for SARGA, a Hyderabad-based legal collective focused on IP, cybercrime, insurance, and labour mandates. Built with React + TypeScript + Vite.
 
-Currently, two official plugins are available:
+## Tech Stack
+- Vite + React 18 + TypeScript
+- CSS modules with custom tokens, gradients, and dark-mode toggles
+- Formspree for contact and talent intake
+- Custom reveal animations (IntersectionObserver) and analytics helper
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Structure
+```
+public/            # Static assets (logos, imagery, favicons)
+src/
+  components/      # Layout + section components
+  data/            # Narrative + practice area content modules
+  hooks/           # Theme preference & utilities
+  styles/          # Base tokens, globals, page styles
+  utils/           # Analytics + reveal helpers
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Scripts
+```bash
+npm install       # install dependencies
+npm run dev       # start Vite dev server (http://localhost:5173)
+npm run build     # production build (outputs dist/)
+npm run preview   # preview production build
 ```
+
+## Deployment
+- Optimized for Vercel: `npm run build` produces static assets served from `dist/`.
+- Set environment variables as needed (`VITE_GA_MEASUREMENT_ID`, `VITE_FORMSPREE_ENDPOINT`, `VITE_FORMSPREE_TALENT_ENDPOINT`).
+- Push to GitHub (`sargaftc-dev/SARGA`) and connect to Vercel for auto deploys.
+
+## Privacy & Compliance
+- Disclaimer gate ensures visitors acknowledge non-solicitation + confidentiality expectations.
+- Contact/Talent forms note NDA availability; update copy as regulatory guidance evolves.
+
+## Roadmap / TODO
+- Add proof points (metrics/testimonials) to hero + practice cards.
+- Enhance partner bios with years, courts, and notable matters.
+- Add CTA to regional reach section.
+- Integrate analytics measurement ID + conversion events.
+- Implement success/error states for forms and optional file uploads.
